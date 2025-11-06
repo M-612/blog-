@@ -1,5 +1,7 @@
 import express from "express";
+import mongoose from "mongoose";
 import Blog from "../models/Blog.js";
+
 const router = express.Router();
 
 // ✅ Get all blogs
@@ -26,6 +28,21 @@ router.post("/", async (req, res) => {
     res.status(201).json(blog);
   } catch (err) {
     res.status(500).json({ message: "Error creating blog", error: err.message });
+  }
+});
+
+// ✅ Get all users from blogdb (new route)
+router.get("/users", async (req, res) => {
+  try {
+    // Option 1: Use Mongoose model if created
+    const users = await User.find();
+
+    // Option 2 (if you don’t have a model yet):
+    // const users = await mongoose.connection.db.collection("users").find().toArray();
+
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching users", error: err.message });
   }
 });
 
