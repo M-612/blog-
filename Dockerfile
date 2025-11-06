@@ -2,7 +2,10 @@
 FROM node:18 AS frontend-build
 WORKDIR /frontend
 COPY frontend/package*.json ./
-RUN npm install
+
+# Install ALL dependencies including devDependencies
+RUN npm install --include=dev
+
 COPY frontend ./
 RUN npm run build
 
