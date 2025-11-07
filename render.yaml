@@ -19,4 +19,4 @@ services:
       cd backend
       npm install
 
-    startCommand: node server.js
+    startCommand: cd backend && node server.js
