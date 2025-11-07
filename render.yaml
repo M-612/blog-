@@ -6,6 +6,11 @@ services:
       cd frontend
       npm install
       npm run build
-      cd ../backend
+      # copy the built frontend into backend/public so the Node backend can serve it
+      cd ..
+      rm -rf backend/public || true
+      mkdir -p backend/public
+      cp -r frontend/build backend/public
+      cd backend
       npm install
     startCommand: cd backend && npm start

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import API_BASE_URL from "./api";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
 import Navbar from "./components/Navbar";
@@ -15,7 +16,7 @@ function App() {
   // ✅ Fetch all blogs from backend
   const fetchBlogs = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/blogs");
+      const res = await fetch(`${API_BASE_URL}/api/blogs`);
       const data = await res.json();
       setBlogs(data);
     } catch (err) {

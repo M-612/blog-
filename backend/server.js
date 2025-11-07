@@ -24,19 +24,14 @@ mongoose
 
 app.use("/api/blogs", blogRoutes);
 
-// ⛔ Remove this route (it blocks React)
-// app.get("/", (req, res) => {
-//   res.send("✅ Backend is running successfully on Render!");
-// });
-
-// ✅ Serve frontend build
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+// ✅ Serve React build from /public
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 const PORT = process.env.PORT || 5000;

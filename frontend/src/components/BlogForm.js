@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import API_BASE_URL from "../api";
 
 function BlogForm({ user, fetchBlogs }) {
   const [title, setTitle] = useState("");
@@ -6,7 +7,8 @@ function BlogForm({ user, fetchBlogs }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/blogs", {
+    const url = `${API_BASE_URL}/api/blogs`;
+    const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
